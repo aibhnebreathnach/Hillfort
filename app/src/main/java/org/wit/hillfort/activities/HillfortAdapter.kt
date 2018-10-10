@@ -50,7 +50,6 @@ class HillfortAdapter constructor(private var hillforts: List<HillfortModel>,
             .into(itemView.hillfortCardImage)
       }
 
-//      itemView.hillfortCardImage.setImageBitmap(readImageFromPath(itemView.context, hillfort.image))
       itemView.setOnClickListener { listener.onHillfortClick(hillfort) }
     }
   }

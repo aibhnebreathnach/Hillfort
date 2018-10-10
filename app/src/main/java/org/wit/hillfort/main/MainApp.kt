@@ -5,9 +5,8 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.wit.hillfort.models.HillfortJSONStore
 import org.wit.hillfort.models.HillfortStore
-import org.wit.hillfort.models.UserMemStore
-import org.wit.hillfort.models.UserModel
 import org.wit.hillfort.models.UserStore
+import org.wit.user.models.UserJSONStore
 
 class MainApp : Application(), AnkoLogger {
 
@@ -17,15 +16,17 @@ class MainApp : Application(), AnkoLogger {
   override fun onCreate() {
     super.onCreate()
 
-    users = UserMemStore()
 
-    users.create(UserModel(0, "pinocchio", "secret"))
-    users.create(UserModel(0, "geppetto", "secret"))
-    users.create(UserModel(0, "jiminy", "secret"))
+//    users.create(UserModel(0, "pinocchio", "secret"))
+//    users.create(UserModel(0, "geppetto", "secret"))
+//    users.create(UserModel(0, "jiminy", "secret"))
 
-//  hillforts = HillfortMemStore()
+//    users = UserMemStore()
+//    hillforts = HillfortMemStore()
+
+    users = UserJSONStore(applicationContext)
     hillforts = HillfortJSONStore(applicationContext)
+
     info("Hillfort started")
-    info("User log: users created :" + users.findAll().toString())
   }
 }

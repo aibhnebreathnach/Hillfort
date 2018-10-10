@@ -22,6 +22,14 @@ class UserMemStore : UserStore, AnkoLogger {
     users.add(user)
   }
 
+  override fun update(user: UserModel) {
+    var foundUser: UserModel? = users.find { p -> p.id == user.id }
+    if (foundUser != null) {
+      foundUser.username = user.username
+      foundUser.password = user.password
+    }
+  }
+
   override fun delete(user: UserModel) {
     users.remove(user)
   }
