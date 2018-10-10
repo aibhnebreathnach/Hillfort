@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.*
+import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.wit.hillfort.R
 import org.wit.hillfort.helpers.readImage
 import org.wit.hillfort.helpers.showImagePicker
@@ -54,6 +55,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
       hillfortTitle.setText(hillfort.title)
       hillfortDescription.setText(hillfort.description)
+      checkbox_visited.setChecked(hillfort.visited)
 
       if (hillfort.images.isEmpty()) {
         Picasso.get()
@@ -77,6 +79,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     btnAdd.setOnClickListener() {
       hillfort.title = hillfortTitle.text.toString()
       hillfort.description = hillfortDescription.text.toString()
+      hillfort.visited = checkbox_visited.isChecked
+
       if (hillfort.title.isEmpty()) {
         toast(R.string.toast_enterTitle)
       } else {
@@ -86,6 +90,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
           app.hillforts.create(hillfort.copy())
         }
       }
+
       info("add Button Pressed: $hillfortTitle")
       setResult(AppCompatActivity.RESULT_OK)
       finish()

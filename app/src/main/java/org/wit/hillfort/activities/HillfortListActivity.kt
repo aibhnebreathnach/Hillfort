@@ -26,7 +26,12 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
 
     val layoutManager = LinearLayoutManager(this)
     recyclerView.layoutManager = layoutManager
-    loadHillforts()
+
+
+    // only load hillforts if the user has signed in
+    if(intent.hasExtra("user_session")){
+      loadHillforts()
+    }
   }
 
   private fun loadHillforts() {

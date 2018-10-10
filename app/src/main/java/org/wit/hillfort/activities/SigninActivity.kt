@@ -5,10 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_signin.*
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
-import org.jetbrains.anko.toolbar
+import org.jetbrains.anko.*
 import org.wit.hillfort.R
 import org.wit.hillfort.main.MainApp
 
@@ -29,10 +26,11 @@ class SigninActivity : AppCompatActivity(), AnkoLogger {
       val username = signin_username.text.toString()
       val password = signin_password.text.toString()
 
-      var res = app.users.findAll().find { it.username == username && it.password == password }
-      if (res != null) {
+      var user = app.users.findAll().find { it.username == username && it.password == password }
+      if (user != null) {
         toast("Sign In Successful!")
-        startActivity<HillfortListActivity>()
+        // start user session
+        startActivityForResult(intentFor<HillfortListActivity>().putExtra("user_session", user), 0)
       } else {
         toast("Incorrect username or password!")
       }
