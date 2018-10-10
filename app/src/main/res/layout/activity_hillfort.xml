@@ -84,10 +84,14 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"/>
 
-                <ImageView
-                    android:id="@+id/hillfortImage"
+                <ListView
+                    android:id="@+id/hillfort_images_list_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="254dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/hillfortLocation"

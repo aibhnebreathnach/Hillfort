@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_hillfort.*
@@ -57,20 +58,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       hillfortDescription.setText(hillfort.description)
       checkbox_visited.setChecked(hillfort.visited)
 
-      if (hillfort.images.isEmpty()) {
-        Picasso.get()
-            .load(R.mipmap.ic_launcher_round)
-            .resize(750, 750)
-            .centerCrop()
-            .into(hillfortImage)
-      } else {
-        Picasso.get()
-            // just show last image for now
-            .load(hillfort.images.get(hillfort.images.size - 1))
-            .resize(1000, 1000)
-            .centerCrop()
-            .into(hillfortImage)
-      }
+      hillfort_images_list_view.adapter = HillfortImageAdapter(this, hillfort.images)
 
       btnAdd.setText(R.string.button_saveHillfort)
     }
@@ -126,12 +114,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
           hillfort.images.add(data.data.toString())
 
-          Picasso.get()
-              // just show last image for now
-              .load(hillfort.images.get(hillfort.images.size - 1))
-              .resize(1000, 1000)
-              .centerCrop()
-              .into(hillfortImage)
+          hillfort_images_list_view.adapter = HillfortImageAdapter(this, hillfort.images)
+
         }
       }
 
