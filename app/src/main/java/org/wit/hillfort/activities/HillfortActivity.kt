@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.*
@@ -15,6 +16,7 @@ import org.wit.hillfort.helpers.showImagePicker
 import org.wit.hillfort.main.MainApp
 import org.wit.hillfort.models.HillfortModel
 import org.wit.hillfort.models.Location
+
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
@@ -54,7 +56,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       hillfortDescription.setText(hillfort.description)
       chooseImage.setText(R.string.button_changeImage)
 
-      if (hillfort.image.isEmpty()) {
+      if (hillfort.images.isEmpty()) {
         Picasso.get()
             .load(R.mipmap.ic_launcher_round)
             .resize(750, 750)
@@ -62,8 +64,9 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             .into(hillfortImage)
       } else {
         Picasso.get()
-            .load(hillfort.image)
-            .resize(750, 750)
+            // just show last image for now
+            .load(hillfort.images.get(hillfort.images.size - 1))
+            .resize(1000, 1000)
             .centerCrop()
             .into(hillfortImage)
       }
@@ -120,8 +123,15 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     when (requestCode) {
       IMAGE_REQUEST -> {
         if (data != null) {
-          hillfort.image = data.getData().toString()
-          hillfortImage.setImageBitmap(readImage(this, resultCode, data))
+
+          hillfort.images.add(data.data.toString())
+
+          Picasso.get()
+              // just show last image for now
+              .load(hillfort.images.get(hillfort.images.size - 1))
+              .resize(1000, 1000)
+              .centerCrop()
+              .into(hillfortImage)
         }
       }
 
