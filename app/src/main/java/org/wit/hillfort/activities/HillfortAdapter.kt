@@ -4,7 +4,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.abc_activity_chooser_view.view.*
+import kotlinx.android.synthetic.main.activity_hillfort.*
 import kotlinx.android.synthetic.main.card_hillfort.view.*
 import org.wit.hillfort.R
 import org.wit.hillfort.helpers.readImageFromPath
@@ -33,7 +35,22 @@ class HillfortAdapter constructor(private var hillforts: List<HillfortModel>,
     fun bind(hillfort: HillfortModel,  listener : HillfortListener) {
       itemView.hillfortTitle.text = hillfort.title
       itemView.description.text = hillfort.description
-      itemView.hillfortCardImage.setImageBitmap(readImageFromPath(itemView.context, hillfort.image))
+
+      if (hillfort.image.isEmpty()) {
+        Picasso.get()
+            .load(R.mipmap.ic_launcher_round)
+            .resize(750, 750)
+            .centerCrop()
+            .into(itemView.hillfortCardImage)
+      } else {
+        Picasso.get()
+            .load(hillfort.image)
+            .resize(750, 750)
+            .centerCrop()
+            .into(itemView.hillfortCardImage)
+      }
+
+//      itemView.hillfortCardImage.setImageBitmap(readImageFromPath(itemView.context, hillfort.image))
       itemView.setOnClickListener { listener.onHillfortClick(hillfort) }
     }
   }

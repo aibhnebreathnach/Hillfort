@@ -27,7 +27,8 @@
 
         <activity
             android:name=".activities.HillfortActivity"
-            android:parentActivityName=".activities.HillfortListActivity" />
+            android:parentActivityName=".activities.HillfortListActivity"
+            android:windowSoftInputMode="stateHidden"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

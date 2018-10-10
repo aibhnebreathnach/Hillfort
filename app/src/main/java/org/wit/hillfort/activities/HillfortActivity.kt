@@ -6,11 +6,11 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.*
 import org.wit.hillfort.R
 import org.wit.hillfort.helpers.readImage
-import org.wit.hillfort.helpers.readImageFromPath
 import org.wit.hillfort.helpers.showImagePicker
 import org.wit.hillfort.main.MainApp
 import org.wit.hillfort.models.HillfortModel
@@ -53,7 +53,21 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       hillfortTitle.setText(hillfort.title)
       hillfortDescription.setText(hillfort.description)
       chooseImage.setText(R.string.button_changeImage)
-      hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
+
+      if (hillfort.image.isEmpty()) {
+        Picasso.get()
+            .load(R.mipmap.ic_launcher_round)
+            .resize(750, 750)
+            .centerCrop()
+            .into(hillfortImage)
+      } else {
+        Picasso.get()
+            .load(hillfort.image)
+            .resize(750, 750)
+            .centerCrop()
+            .into(hillfortImage)
+      }
+
       btnAdd.setText(R.string.button_saveHillfort)
     }
 
@@ -77,7 +91,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
   }
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-    menuInflater.inflate(R.menu.menu_hillfort, menu)
+    menuInflater.inflate(R.menu.menu_hillfort_edit, menu)
     return super.onCreateOptionsMenu(menu)
   }
 
