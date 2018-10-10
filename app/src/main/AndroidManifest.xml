@@ -35,6 +35,11 @@
             android:name=".activities.HillfortListActivity" />
 
         <activity
+            android:name=".activities.SettingsActivity"
+            android:parentActivityName=".activities.HillfortListActivity"
+            android:windowSoftInputMode="stateHidden"/>
+
+        <activity
             android:name=".activities.HillfortActivity"
             android:parentActivityName=".activities.HillfortListActivity"
             android:windowSoftInputMode="stateHidden"/>

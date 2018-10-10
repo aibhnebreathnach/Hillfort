@@ -11,10 +11,12 @@ import org.jetbrains.anko.startActivityForResult
 import org.wit.hillfort.R
 import org.wit.hillfort.main.MainApp
 import org.wit.hillfort.models.HillfortModel
+import org.wit.hillfort.models.UserModel
 
 class HillfortListActivity : AppCompatActivity(), HillfortListener {
 
   lateinit var app: MainApp
+  lateinit var user: UserModel
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -27,11 +29,12 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
     val layoutManager = LinearLayoutManager(this)
     recyclerView.layoutManager = layoutManager
 
-
-    // only load hillforts if the user has signed in
     if(intent.hasExtra("user_session")){
-      loadHillforts()
+      user = intent.extras.getParcelable<UserModel>("user_session")
     }
+
+    loadHillforts()
+
   }
 
   private fun loadHillforts() {
@@ -60,6 +63,7 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     when (item?.itemId) {
       R.id.item_add -> startActivityForResult<HillfortActivity>(0)
+      R.id.item_settings -> startActivityForResult(intentFor<SettingsActivity>().putExtra("user_session", user), 0)
     }
     return super.onOptionsItemSelected(item)
   }
