@@ -18,12 +18,16 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.HillfortListActivity"></activity>
+        <activity
+            android:name=".activities.SigninActivity"
+            android:windowSoftInputMode="stateHidden"/>
+
+        <activity
+            android:name=".activities.HillfortListActivity" />
 
         <activity
             android:name=".activities.HillfortActivity"
@@ -36,7 +40,9 @@
 
         <activity
             android:name=".activities.MapsActivity"
+            android:parentActivityName=".activities.HillfortActivity"
             android:label="@string/title_activity_maps"></activity>
+
     </application>
 
 </manifest>

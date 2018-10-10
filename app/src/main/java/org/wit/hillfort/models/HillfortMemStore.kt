@@ -3,9 +3,9 @@ package org.wit.hillfort.models
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-var lastId = 0L
+private var lastId = 0L
 
-internal fun getId(): Long {
+private fun getId(): Long {
   return lastId++
 }
 

@@ -54,7 +54,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
       hillfortTitle.setText(hillfort.title)
       hillfortDescription.setText(hillfort.description)
-      chooseImage.setText(R.string.button_changeImage)
 
       if (hillfort.images.isEmpty()) {
         Picasso.get()
@@ -100,10 +99,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     when (item?.itemId) {
-
-      R.id.home -> {
-        toast("Home pressed!")
-      }
 
       R.id.item_cancel -> {
         finish()
