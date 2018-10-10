@@ -7,10 +7,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_hillfort.*
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.*
 import org.wit.hillfort.R
 import org.wit.hillfort.helpers.readImage
 import org.wit.hillfort.helpers.readImageFromPath
@@ -33,8 +30,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     app = application as MainApp
     var edit = false
 
-    toolbarHillfort.title = title
     setSupportActionBar(toolbarHillfort)
+    supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
     chooseImage.setOnClickListener {
       showImagePicker(this, IMAGE_REQUEST)
@@ -86,6 +83,11 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     when (item?.itemId) {
+
+      R.id.home -> {
+        toast("Home pressed!")
+      }
+
       R.id.item_cancel -> {
         finish()
       }
