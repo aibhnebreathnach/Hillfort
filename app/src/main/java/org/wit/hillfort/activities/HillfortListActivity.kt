@@ -8,6 +8,7 @@ import android.view.*
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
+import org.jetbrains.anko.toast
 import org.wit.hillfort.R
 import org.wit.hillfort.main.MainApp
 import org.wit.hillfort.models.HillfortModel
@@ -64,6 +65,10 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
     when (item?.itemId) {
       R.id.item_add -> startActivityForResult<HillfortActivity>(0)
       R.id.item_settings -> startActivityForResult(intentFor<SettingsActivity>().putExtra("user_session", user), 0)
+      R.id.item_logout -> {
+        startActivityForResult<SigninActivity>(0)
+        toast(R.string.toast_logout)
+      }
     }
     return super.onOptionsItemSelected(item)
   }

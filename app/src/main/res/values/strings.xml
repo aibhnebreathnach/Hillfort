@@ -21,6 +21,7 @@
 
     <string name="toast_enterTitle">Please Enter a title</string>
     <string name="toast_username_password">Username and password can\'t be blank!</string>
+    <string name="toast_logout">Logged Out!</string>
 
     <string name="button_addImage"> Add Image </string>
     <string name="select_hillfort_image">Select hillfort image</string>

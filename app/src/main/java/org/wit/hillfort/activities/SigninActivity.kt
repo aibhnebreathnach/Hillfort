@@ -31,6 +31,7 @@ class SigninActivity : AppCompatActivity(), AnkoLogger {
         toast("Sign In Successful!")
         // start user session
         startActivityForResult(intentFor<HillfortListActivity>().putExtra("user_session", user), 0)
+        finish()
       } else {
         toast("Incorrect username or password!")
       }
