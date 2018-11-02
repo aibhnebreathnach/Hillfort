@@ -56,6 +56,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
       hillfortTitle.setText(hillfort.title)
       hillfortDescription.setText(hillfort.description)
+      hillfortNotes.setText(hillfort.notes)
       checkbox_visited.setChecked(hillfort.visited)
 
       hillfort_images_list_view.adapter = HillfortImageAdapter(this, hillfort.images)
@@ -73,6 +74,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       R.id.item_save -> {
         hillfort.title = hillfortTitle.text.toString()
         hillfort.description = hillfortDescription.text.toString()
+        hillfort.notes = hillfortNotes.text.toString()
         hillfort.visited = checkbox_visited.isChecked
 
         if (hillfort.title.isEmpty()) {

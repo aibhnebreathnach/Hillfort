@@ -59,11 +59,24 @@
                     android:layout_margin="8dp"
                     android:hint="@string/hint_hillfortDescription"
                     android:inputType="text"
-                    android:maxLength="25"
+                    android:maxLength="50"
                     android:maxLines="1"
                     android:padding="8dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp" />
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/hillfortNotes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:hint="@string/hint_hillfortNotes"
+                    android:inputType="textMultiLine"
+                    android:maxLength="100"
+                    android:maxLines="4"
+                    android:padding="8dp"
+                    android:singleLine="false"
+                    android:textAlignment="viewStart" />
 
                 <CheckBox
                     android:id="@+id/checkbox_visited"
