@@ -13,12 +13,14 @@ import org.wit.hillfort.helpers.showImagePicker
 import org.wit.hillfort.main.MainApp
 import org.wit.hillfort.models.HillfortModel
 import org.wit.hillfort.models.Location
+import org.wit.hillfort.models.UserModel
 import java.util.*
 
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
   var hillfort = HillfortModel()
+  lateinit var user : UserModel
   lateinit var app : MainApp
   val IMAGE_REQUEST = 1;
   val LOCATION_REQUEST = 2
@@ -57,6 +59,10 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       hillfortDate.setText(hillfort.date)
     }
 
+    if (intent.hasExtra("user_session")) {
+      user = intent.extras.getParcelable<UserModel>("user_session")
+    }
+
     if (intent.hasExtra("hillfort_edit")) {
       edit = true
       hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
@@ -89,9 +95,13 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
           toast(R.string.toast_enterTitle)
         } else {
           if (edit) {
-            app.hillforts.update(hillfort.copy())
+//            app.hillforts.update(hillfort.copy())
+            app.users.updateHillfort(user, hillfort.copy())
           } else {
-            app.hillforts.create(hillfort.copy())
+//            app.hillforts.create(hillfort.copy())
+
+            info("USER LOG: Creating hillfort: " + hillfort.toString())
+            app.users.createHillfort(user, hillfort.copy())
           }
         }
         setResult(AppCompatActivity.RESULT_OK)
@@ -103,7 +113,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       }
 
       R.id.item_delete -> {
-        app.hillforts.delete(hillfort)
+//        app.hillforts.delete(hillfort)
+        app.users.deleteHillfort(user, hillfort)
         finish()
         toast("Hillfort Deleted!")
       }

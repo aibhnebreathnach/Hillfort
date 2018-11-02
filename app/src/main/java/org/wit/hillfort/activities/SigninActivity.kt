@@ -26,7 +26,7 @@ class SigninActivity : AppCompatActivity(), AnkoLogger {
       val username = signin_username.text.toString()
       val password = signin_password.text.toString()
 
-      var user = app.users.findAll().find { it.username == username && it.password == password }
+      var user = app.users.findAllUsers().find { it.username == username && it.password == password }
       if (user != null) {
         toast("Sign In Successful!")
         // start user session

@@ -37,7 +37,7 @@ class SignupActivity : AppCompatActivity(), AnkoLogger {
         var newuser = UserModel()
         newuser.username = username
         newuser.password = password
-        app.users.create(newuser)
+        app.users.createUser(newuser)
         finish()
       }
 

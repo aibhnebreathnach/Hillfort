@@ -21,7 +21,6 @@ class HillfortJSONStore : HillfortStore, AnkoLogger {
   val context: Context
   var hillforts = mutableListOf<HillfortModel>()
 
-
   constructor(context: Context){
     this.context = context
     if(exists(context, JSON_FILE)){

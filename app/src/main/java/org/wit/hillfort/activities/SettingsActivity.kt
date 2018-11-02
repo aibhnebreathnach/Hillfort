@@ -43,7 +43,7 @@ class SettingsActivity : AppCompatActivity() {
         if (user.username.isEmpty() || user.password.isEmpty()) {
           toast(R.string.toast_username_password)
         } else {
-          app.users.update(user.copy())
+          app.users.updateUser(user.copy())
         }
         setResult(AppCompatActivity.RESULT_OK)
         finish()

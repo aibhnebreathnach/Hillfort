@@ -32,20 +32,25 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
 
     if(intent.hasExtra("user_session")){
       user = intent.extras.getParcelable<UserModel>("user_session")
+
       // update user object on activity start
       // So that the updated user object is passed, not the old one the activity is started with
-      for (saved_user in app.users.findAll())
-        if(saved_user.id == user.id) user = saved_user
+      for (saved_user in app.users.findAllUsers()) {
+        if (saved_user.id == user.id){
+          user = saved_user
+        }
+      }
 
       toolbarMain.title = user.username
+      showHillforts(user.hillforts) // show users hillforts
     }
 
-    loadHillforts()
+//    loadHillforts()
 
   }
 
   private fun loadHillforts() {
-    showHillforts(app.hillforts.findAll())
+    showHillforts(app.users.findAllHillforts(user))
   }
 
   fun showHillforts (hillforts: List<HillfortModel>) {
@@ -69,7 +74,7 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
 
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     when (item?.itemId) {
-      R.id.item_add -> startActivityForResult<HillfortActivity>(0)
+      R.id.item_add -> startActivityForResult(intentFor<HillfortActivity>().putExtra("user_session", user), 0)
       R.id.item_settings -> startActivityForResult(intentFor<SettingsActivity>().putExtra("user_session", user), 0)
       R.id.item_logout -> {
         startActivityForResult<SigninActivity>(0)
