@@ -6,18 +6,14 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ArrayAdapter
-import android.widget.Toast
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.*
-import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.wit.hillfort.R
-import org.wit.hillfort.helpers.readImage
 import org.wit.hillfort.helpers.showImagePicker
 import org.wit.hillfort.main.MainApp
 import org.wit.hillfort.models.HillfortModel
 import org.wit.hillfort.models.Location
+import java.util.*
 
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
@@ -51,6 +47,16 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
     }
 
+    checkbox_visited.setOnClickListener {
+
+      if(checkbox_visited.isChecked){
+        hillfort.date = Date().toString()
+      } else {
+        hillfort.date = ""
+      }
+      hillfortDate.setText(hillfort.date)
+    }
+
     if (intent.hasExtra("hillfort_edit")) {
       edit = true
       hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
@@ -58,6 +64,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       hillfortDescription.setText(hillfort.description)
       hillfortNotes.setText(hillfort.notes)
       checkbox_visited.setChecked(hillfort.visited)
+      hillfortDate.setText(hillfort.date)
 
       hillfort_images_list_view.adapter = HillfortImageAdapter(this, hillfort.images)
     }
@@ -76,6 +83,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         hillfort.description = hillfortDescription.text.toString()
         hillfort.notes = hillfortNotes.text.toString()
         hillfort.visited = checkbox_visited.isChecked
+        hillfort.date = hillfortDate.text.toString()
 
         if (hillfort.title.isEmpty()) {
           toast(R.string.toast_enterTitle)
