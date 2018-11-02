@@ -28,7 +28,7 @@
 
         <ImageView
             android:id="@+id/hillfortCardImage"
-            android:layout_width="228dp"
+            android:layout_width="364dp"
             android:layout_height="151dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"

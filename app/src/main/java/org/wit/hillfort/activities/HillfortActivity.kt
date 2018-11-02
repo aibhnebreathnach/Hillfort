@@ -27,12 +27,12 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
   val IMAGE_REQUEST = 1;
   val LOCATION_REQUEST = 2
   var location = Location(52.245696, -7.139102, 15f)
+  var edit = false
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_hillfort)
     app = application as MainApp
-    var edit = false
 
     setSupportActionBar(toolbarHillfort)
     supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -59,29 +59,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       checkbox_visited.setChecked(hillfort.visited)
 
       hillfort_images_list_view.adapter = HillfortImageAdapter(this, hillfort.images)
-
-      btnAdd.setText(R.string.button_saveHillfort)
-    }
-
-
-    btnAdd.setOnClickListener() {
-      hillfort.title = hillfortTitle.text.toString()
-      hillfort.description = hillfortDescription.text.toString()
-      hillfort.visited = checkbox_visited.isChecked
-
-      if (hillfort.title.isEmpty()) {
-        toast(R.string.toast_enterTitle)
-      } else {
-        if (edit) {
-          app.hillforts.update(hillfort.copy())
-        } else {
-          app.hillforts.create(hillfort.copy())
-        }
-      }
-
-      info("add Button Pressed: $hillfortTitle")
-      setResult(AppCompatActivity.RESULT_OK)
-      finish()
     }
   }
 
@@ -92,6 +69,24 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     when (item?.itemId) {
+
+      R.id.item_save -> {
+        hillfort.title = hillfortTitle.text.toString()
+        hillfort.description = hillfortDescription.text.toString()
+        hillfort.visited = checkbox_visited.isChecked
+
+        if (hillfort.title.isEmpty()) {
+          toast(R.string.toast_enterTitle)
+        } else {
+          if (edit) {
+            app.hillforts.update(hillfort.copy())
+          } else {
+            app.hillforts.create(hillfort.copy())
+          }
+        }
+        setResult(AppCompatActivity.RESULT_OK)
+        finish()
+      }
 
       R.id.item_cancel -> {
         finish()
@@ -113,7 +108,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         if (data != null) {
 
           hillfort.images.add(data.data.toString())
-
           hillfort_images_list_view.adapter = HillfortImageAdapter(this, hillfort.images)
 
         }

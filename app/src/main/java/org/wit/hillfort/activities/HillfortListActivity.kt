@@ -32,6 +32,12 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
 
     if(intent.hasExtra("user_session")){
       user = intent.extras.getParcelable<UserModel>("user_session")
+      // update user object on activity start
+      // So that the updated user object is passed, not the old one the activity is started with
+      for (saved_user in app.users.findAll())
+        if(saved_user.id == user.id) user = saved_user
+
+      toolbarMain.title = user.username
     }
 
     loadHillforts()

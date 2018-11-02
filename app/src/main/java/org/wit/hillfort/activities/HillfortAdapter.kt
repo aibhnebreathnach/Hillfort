@@ -44,8 +44,6 @@ class HillfortAdapter constructor(private var hillforts: List<HillfortModel>,
       } else {
         Picasso.get()
             .load(hillfort.images[0]) // only load first image of list
-            .resize(1000, 1000)
-            .centerCrop()
             .into(itemView.hillfortCardImage)
       }
 

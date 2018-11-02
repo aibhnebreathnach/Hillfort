@@ -32,7 +32,8 @@
             android:windowSoftInputMode="stateHidden"/>
 
         <activity
-            android:name=".activities.HillfortListActivity" />
+            android:name=".activities.HillfortListActivity"
+            android:launchMode="singleTop"/>
 
         <activity
             android:name=".activities.SettingsActivity"
