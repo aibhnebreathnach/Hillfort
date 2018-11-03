@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.*
 import org.wit.hillfort.R
@@ -73,7 +75,11 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       checkbox_visited.setChecked(hillfort.visited)
       hillfortDate.setText(hillfort.date)
 
-      hillfort_images_list_view.adapter = HillfortImageAdapter(this, hillfort.images)
+//      hillfort_images_list_view.adapter = HillfortImageAdapter(this, hillfort.images)
+      for (image in hillfort.images) {
+        addImageToView(image)
+      }
+
     }
   }
 
@@ -124,8 +130,9 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       IMAGE_REQUEST -> {
         if (data != null) {
 
-          hillfort.images.add(data.data.toString())
-          hillfort_images_list_view.adapter = HillfortImageAdapter(this, hillfort.images)
+          val image = data.data.toString()
+          hillfort.images.add(image)
+          addImageToView(image)
 
         }
       }
@@ -139,6 +146,19 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         }
       }
     }
+  }
+
+  fun addImageToView(image: String){
+    val image_view = ImageView(this)
+    image_view.setPadding(8, 10, 8, 10)
+
+    Picasso.get().load(image)
+        .placeholder(R.mipmap.ic_launcher)
+        .resize(1000, 1000)
+        .centerInside()
+        .into(image_view)
+
+    hillfort_layout.addView(image_view)
   }
 
 }
