@@ -83,14 +83,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
+                    android:layout_margin="8dp"
                     android:text="@string/checkbox_visited"/>
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
                     android:id="@+id/hillfortDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
                     android:ems="10"
-                    android:inputType="date"
+                    android:inputType="none"
                     tools:layout_editor_absoluteX="102dp"
                     tools:layout_editor_absoluteY="209dp" />
 

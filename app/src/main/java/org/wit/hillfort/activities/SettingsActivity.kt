@@ -29,6 +29,20 @@ class SettingsActivity : AppCompatActivity() {
       user = intent.extras.getParcelable<UserModel>("user_session")
       settings_username.setText(user.username)
       settings_password.setText(user.password)
+
+      var hillfortCountTotal = user.hillforts.size
+      var hillfortCountVisited = user.hillforts.count { hf -> hf.visited }
+
+      settings_hillfort_count_total.setBackground(null)
+      settings_hillfort_count_total.setKeyListener(null)
+      settings_hillfort_count_visited.setBackground(null)
+      settings_hillfort_count_visited.setKeyListener(null)
+
+      val total = getResources().getString(R.string.settings_hillfort_count_total)
+      val visited = getResources().getString(R.string.settings_hillfort_count_visited)
+      settings_hillfort_count_total.setText(hillfortCountTotal.toString() +" "+ total)
+      settings_hillfort_count_visited.setText(hillfortCountVisited.toString() +" "+ visited)
+
     }
 
   }

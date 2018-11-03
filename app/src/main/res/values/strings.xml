@@ -42,6 +42,8 @@
 
     <string name="hint_settings_username">username</string>
     <string name="hint_settings_password">password</string>
+    <string name="settings_hillfort_count_total">Total Hillforts</string>
+    <string name="settings_hillfort_count_visited">Hillforts Visited</string>
 
 </resources>
 

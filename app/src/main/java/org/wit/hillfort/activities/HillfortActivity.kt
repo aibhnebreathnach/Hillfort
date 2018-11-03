@@ -65,6 +65,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     if (intent.hasExtra("hillfort_edit")) {
       edit = true
+      user = intent.extras.getParcelable<UserModel>("user_session")
       hillfort = intent.extras.getParcelable<HillfortModel>("hillfort_edit")
       hillfortTitle.setText(hillfort.title)
       hillfortDescription.setText(hillfort.description)
@@ -95,12 +96,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
           toast(R.string.toast_enterTitle)
         } else {
           if (edit) {
-//            app.hillforts.update(hillfort.copy())
             app.users.updateHillfort(user, hillfort.copy())
           } else {
-//            app.hillforts.create(hillfort.copy())
-
-            info("USER LOG: Creating hillfort: " + hillfort.toString())
             app.users.createHillfort(user, hillfort.copy())
           }
         }
@@ -113,7 +110,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
       }
 
       R.id.item_delete -> {
-//        app.hillforts.delete(hillfort)
         app.users.deleteHillfort(user, hillfort)
         finish()
         toast("Hillfort Deleted!")

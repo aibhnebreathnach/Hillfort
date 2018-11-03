@@ -58,7 +58,6 @@ class UserJSONStore : UserStore, AnkoLogger {
     serialize()
   }
 
-
   override fun findAllHillforts(user: UserModel): List<HillfortModel> {
     var foundUser: UserModel? = users.find { p -> p.id == user.id }
     return foundUser!!.hillforts
@@ -74,18 +73,21 @@ class UserJSONStore : UserStore, AnkoLogger {
   }
 
   override fun updateHillfort(user: UserModel, hillfort: HillfortModel) {
-    var foundHillfort: HillfortModel? = user.hillforts.find {p -> p.id == hillfort.id}
-    if (foundHillfort != null){
-      foundHillfort.title = hillfort.title
-      foundHillfort.description = hillfort.description
-      foundHillfort.notes = hillfort.notes
-      foundHillfort.date = hillfort.date
-      foundHillfort.visited = hillfort.visited
-      foundHillfort.images = hillfort.images;
-      foundHillfort.lat = hillfort.lat;
-      foundHillfort.lng = hillfort.lng;
-      foundHillfort.zoom = hillfort.zoom;
-      serialize()
+    var foundUser: UserModel? = users.find { p -> p.id == user.id }
+    if (foundUser != null) {
+      var foundHillfort: HillfortModel? = foundUser.hillforts.find { p -> p.id == hillfort.id }
+      if (foundHillfort != null){
+        foundHillfort.title = hillfort.title
+        foundHillfort.description = hillfort.description
+        foundHillfort.notes = hillfort.notes
+        foundHillfort.date = hillfort.date
+        foundHillfort.visited = hillfort.visited
+        foundHillfort.images = hillfort.images;
+        foundHillfort.lat = hillfort.lat;
+        foundHillfort.lng = hillfort.lng;
+        foundHillfort.zoom = hillfort.zoom;
+        serialize()
+      }
     }
   }
 
@@ -99,7 +101,6 @@ class UserJSONStore : UserStore, AnkoLogger {
 
   private fun serialize() {
     val userJson = gsonBuilder.toJson(users)
-    info("USER LOG: JSON users String -> " + userJson)
     write(context, JSON_FILE, userJson)
   }
 

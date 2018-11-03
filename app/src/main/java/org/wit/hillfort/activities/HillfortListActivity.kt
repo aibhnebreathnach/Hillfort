@@ -64,7 +64,9 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
   }
 
   override fun onHillfortClick(hillfort: HillfortModel) {
-    startActivityForResult(intentFor<HillfortActivity>().putExtra("hillfort_edit", hillfort), 0)
+    startActivityForResult(intentFor<HillfortActivity>()
+        .putExtra("hillfort_edit", hillfort)
+        .putExtra("user_session", user), 0)
   }
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
