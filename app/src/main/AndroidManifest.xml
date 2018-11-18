@@ -41,7 +41,7 @@
             android:windowSoftInputMode="stateHidden"/>
 
         <activity
-            android:name=".activities.HillfortActivity"
+            android:name=".views.hillfort.HillfortView"
             android:parentActivityName=".activities.HillfortListActivity"
             android:windowSoftInputMode="stateHidden"/>
 
@@ -51,7 +51,7 @@
 
         <activity
             android:name=".activities.MapsActivity"
-            android:parentActivityName=".activities.HillfortActivity"
+            android:parentActivityName=".views.hillfort.HillfortView"
             android:label="@string/title_activity_maps"></activity>
 
     </application>

@@ -13,6 +13,7 @@ import org.wit.hillfort.R
 import org.wit.hillfort.main.MainApp
 import org.wit.hillfort.models.HillfortModel
 import org.wit.hillfort.models.UserModel
+import org.wit.hillfort.views.hillfort.HillfortView
 
 class HillfortListActivity : AppCompatActivity(), HillfortListener {
 
@@ -45,8 +46,6 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
       showHillforts(user.hillforts) // show users hillforts
     }
 
-//    loadHillforts()
-
   }
 
   private fun loadHillforts() {
@@ -64,7 +63,7 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
   }
 
   override fun onHillfortClick(hillfort: HillfortModel) {
-    startActivityForResult(intentFor<HillfortActivity>()
+    startActivityForResult(intentFor<HillfortView>()
         .putExtra("hillfort_edit", hillfort)
         .putExtra("user_session", user), 0)
   }
@@ -76,7 +75,7 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
 
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     when (item?.itemId) {
-      R.id.item_add -> startActivityForResult(intentFor<HillfortActivity>().putExtra("user_session", user), 0)
+      R.id.item_add -> startActivityForResult(intentFor<HillfortView>().putExtra("user_session", user), 0)
       R.id.item_settings -> startActivityForResult(intentFor<SettingsActivity>().putExtra("user_session", user), 0)
       R.id.item_logout -> {
         startActivityForResult<SigninActivity>(0)

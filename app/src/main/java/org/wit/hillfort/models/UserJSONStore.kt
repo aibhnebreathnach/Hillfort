@@ -15,7 +15,6 @@ import java.util.*
 private val JSON_FILE = "users.json"
 private val gsonBuilder = GsonBuilder().setPrettyPrinting().create()
 private val userlistType = object : TypeToken<java.util.ArrayList<UserModel>>() {}.type
-private val hillfortListType = object : TypeToken<java.util.ArrayList<HillfortModel>>() {}.type
 
 private fun generateRandomId(): Long{
   return Random().nextLong()
