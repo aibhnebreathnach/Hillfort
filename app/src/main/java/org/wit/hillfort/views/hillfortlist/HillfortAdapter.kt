@@ -1,11 +1,10 @@
-package org.wit.hillfort.activities
+package org.wit.hillfort.views.hillfortlist
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_hillfort.view.*
 import kotlinx.android.synthetic.main.card_hillfort.view.*
 import org.wit.hillfort.R
 import org.wit.hillfort.models.HillfortModel

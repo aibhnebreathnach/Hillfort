@@ -32,17 +32,17 @@
             android:windowSoftInputMode="stateHidden"/>
 
         <activity
-            android:name=".activities.HillfortListActivity"
+            android:name=".views.hillfortlist.HillfortListView"
             android:launchMode="singleTop"/>
 
         <activity
             android:name=".activities.SettingsActivity"
-            android:parentActivityName=".activities.HillfortListActivity"
+            android:parentActivityName=".views.hillfortlist.HillfortListView"
             android:windowSoftInputMode="stateHidden"/>
 
         <activity
             android:name=".views.hillfort.HillfortView"
-            android:parentActivityName=".activities.HillfortListActivity"
+            android:parentActivityName=".views.hillfortlist.HillfortListView"
             android:windowSoftInputMode="stateHidden"/>
 
         <meta-data

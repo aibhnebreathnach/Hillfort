@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.activity_signin.*
 import org.jetbrains.anko.*
 import org.wit.hillfort.R
 import org.wit.hillfort.main.MainApp
+import org.wit.hillfort.views.hillfortlist.HillfortListView
 
 class SigninActivity : AppCompatActivity(), AnkoLogger {
 
@@ -30,7 +31,7 @@ class SigninActivity : AppCompatActivity(), AnkoLogger {
       if (user != null) {
         toast("Sign In Successful!")
         // start user session
-        startActivityForResult(intentFor<HillfortListActivity>().putExtra("user_session", user), 0)
+        startActivityForResult(intentFor<HillfortListView>().putExtra("user_session", user), 0)
         finish()
       } else {
         toast("Incorrect username or password!")

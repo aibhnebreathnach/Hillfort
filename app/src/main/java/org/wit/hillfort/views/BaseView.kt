@@ -6,8 +6,10 @@ import android.os.Parcelable
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import org.jetbrains.anko.AnkoLogger
-import org.wit.hillfort.activities.HillfortListActivity
+import org.wit.hillfort.views.hillfortlist.HillfortListView
 import org.wit.hillfort.activities.MapsActivity
+import org.wit.hillfort.activities.SettingsActivity
+import org.wit.hillfort.activities.SigninActivity
 import org.wit.hillfort.models.HillfortModel
 import org.wit.hillfort.views.hillfort.HillfortView
 
@@ -15,7 +17,7 @@ val IMAGE_REQUEST = 1
 val LOCATION_REQUEST = 2
 
 enum class VIEW {
-  LOCATION, HILLFORT, MAPS, LIST
+  LOCATION, HILLFORT, MAPS, LIST, SETTINGS, SIGNIN
 }
 
 open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
@@ -24,12 +26,14 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
 
   // Navigate to a new activity
   fun navigateTo(view: VIEW, code: Int = 0, key: String = "", value: Parcelable? = null) {
-    var intent = Intent(this, HillfortListActivity::class.java)
+    var intent = Intent(this, HillfortListView::class.java)
     when (view) {
       VIEW.LOCATION -> intent = Intent(this, MapsActivity::class.java)
       VIEW.HILLFORT -> intent = Intent(this, HillfortView::class.java)
 //      VIEW.MAPS -> intent = Intent(this, HillfortMapView::class.java)
-      VIEW.LIST -> intent = Intent(this, HillfortListActivity::class.java)
+      VIEW.LIST -> intent = Intent(this, HillfortListView::class.java)
+      VIEW.SETTINGS -> intent = Intent(this, SettingsActivity::class.java)
+      VIEW.SIGNIN -> intent = Intent(this, SigninActivity::class.java)
     }
     if (key != "") {
       intent.putExtra(key, value)
