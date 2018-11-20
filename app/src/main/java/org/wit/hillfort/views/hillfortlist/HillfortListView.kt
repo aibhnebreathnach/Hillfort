@@ -28,13 +28,12 @@ class HillfortListView : BaseView(), HillfortListener {
 
       // update user object on activity start
       // So that the updated user object is passed, not the old one the activity is started with
-//      for (saved_user in presenter.users.findAllUsers()) {
-//        if (saved_user.id == user.id){
-//          user = saved_user
-//        }
-//      }
+      for (saved_user in presenter.app.users.findAllUsers()) {
+        if (saved_user.id == presenter.user.id){
+          presenter.user = saved_user
+        }
+      }
 
-      toolbarMain.title = presenter.user.username
     }
 
     val layoutManager = LinearLayoutManager(this)

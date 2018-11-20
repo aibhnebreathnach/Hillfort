@@ -1,46 +1,33 @@
-package org.wit.hillfort.activities
+package org.wit.hillfort.views.signup
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_signin.*
 import kotlinx.android.synthetic.main.activity_signup.*
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
+
 import org.wit.hillfort.R
-import org.wit.hillfort.main.MainApp
-import org.wit.hillfort.models.UserModel
+import org.wit.hillfort.views.BaseView
 
-class SignupActivity : AppCompatActivity(), AnkoLogger {
+class SignupView : BaseView(), AnkoLogger {
 
-  lateinit var app: MainApp
+  lateinit var presenter: SignupPresenter
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_signup)
-    app = application as MainApp
 
     toolbarSignup.title = getString(R.string.signup_title)
     setSupportActionBar(toolbarSignup)
     supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+    presenter = initPresenter (SignupPresenter(this)) as SignupPresenter
+
     signup_button.setOnClickListener() {
 
       val username = signup_username.text.toString()
       val password = signup_password.text.toString()
-
-      if(username == "" || password == ""){
-        toast("Please enter a username and password!")
-      } else {
-        var newuser = UserModel()
-        newuser.username = username
-        newuser.password = password
-        app.users.createUser(newuser)
-        finish()
-      }
-
+      presenter.doSignup(username, password)
     }
 
   }

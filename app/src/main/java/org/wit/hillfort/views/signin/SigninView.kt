@@ -1,23 +1,23 @@
-package org.wit.hillfort.activities
+package org.wit.hillfort.views.signin
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_signin.*
 import org.jetbrains.anko.*
 import org.wit.hillfort.R
-import org.wit.hillfort.main.MainApp
-import org.wit.hillfort.views.hillfortlist.HillfortListView
+import org.wit.hillfort.views.BaseView
+import org.wit.hillfort.views.VIEW
 
-class SigninActivity : AppCompatActivity(), AnkoLogger {
+class SigninView : BaseView(), AnkoLogger {
 
-  lateinit var app : MainApp
+  lateinit var presenter : SigninPresenter
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_signin)
-    app = application as MainApp
+
+    presenter = initPresenter (SigninPresenter(this)) as SigninPresenter
 
     toolbarSignin.title = getString(R.string.signin_title)
     setSupportActionBar(toolbarSignin)
@@ -26,16 +26,7 @@ class SigninActivity : AppCompatActivity(), AnkoLogger {
 
       val username = signin_username.text.toString()
       val password = signin_password.text.toString()
-
-      var user = app.users.findAllUsers().find { it.username == username && it.password == password }
-      if (user != null) {
-        toast("Sign In Successful!")
-        // start user session
-        startActivityForResult(intentFor<HillfortListView>().putExtra("user_session", user), 0)
-        finish()
-      } else {
-        toast("Incorrect username or password!")
-      }
+      presenter.doSignin(username, password)
     }
 
   }
@@ -44,7 +35,7 @@ class SigninActivity : AppCompatActivity(), AnkoLogger {
     when (item?.itemId) {
 
       R.id.signup -> {
-        startActivity<SignupActivity>()
+        navigateTo(VIEW.SIGNUP)
       }
 
     }

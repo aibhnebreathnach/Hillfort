@@ -7,6 +7,7 @@ import android.os.Handler
 import android.view.Window
 import android.view.WindowManager
 import org.wit.hillfort.R
+import org.wit.hillfort.views.signin.SigninView
 
 class SplashActivity : AppCompatActivity() {
 
@@ -20,7 +21,7 @@ class SplashActivity : AppCompatActivity() {
 
     // Start this activity and wait to start Main Activity
     Handler().postDelayed({
-      startActivity(Intent(this, SigninActivity::class.java)) // start main activity
+      startActivity(Intent(this, SigninView::class.java)) // start main activity
       finish() // finish this activity
     }, wait)
 

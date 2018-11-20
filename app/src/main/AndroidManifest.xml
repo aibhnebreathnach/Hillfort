@@ -23,12 +23,12 @@
         </activity>
 
         <activity
-            android:name=".activities.SigninActivity"
+            android:name=".views.signin.SigninView"
             android:windowSoftInputMode="stateHidden"/>
 
         <activity
-            android:name=".activities.SignupActivity"
-            android:parentActivityName=".activities.SigninActivity"
+            android:name=".views.signup.SignupView"
+            android:parentActivityName=".views.signin.SigninView"
             android:windowSoftInputMode="stateHidden"/>
 
         <activity
@@ -36,7 +36,7 @@
             android:launchMode="singleTop"/>
 
         <activity
-            android:name=".activities.SettingsActivity"
+            android:name=".views.settings.SettingsView"
             android:parentActivityName=".views.hillfortlist.HillfortListView"
             android:windowSoftInputMode="stateHidden"/>
 

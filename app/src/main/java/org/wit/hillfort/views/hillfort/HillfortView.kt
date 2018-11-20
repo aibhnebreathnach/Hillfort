@@ -61,7 +61,7 @@ class HillfortView : BaseView(), AnkoLogger {
         if (hillfort.title.isEmpty()) {
           toast(R.string.toast_enterTitle)
         } else {
-          presenter.doAddOrSave(hillfort.title, hillfort.description, hillfort.notes, hillfort.visited, hillfort.date)
+          presenter.doAddOrSave(hillfort.title, hillfort.description, hillfort.notes, hillfort.visited, hillfort.date, hillfort.images)
         }
         setResult(AppCompatActivity.RESULT_OK)
         finish()

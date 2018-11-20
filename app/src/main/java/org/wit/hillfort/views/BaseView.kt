@@ -8,8 +8,9 @@ import android.support.v7.widget.Toolbar
 import org.jetbrains.anko.AnkoLogger
 import org.wit.hillfort.views.hillfortlist.HillfortListView
 import org.wit.hillfort.activities.MapsActivity
-import org.wit.hillfort.activities.SettingsActivity
-import org.wit.hillfort.activities.SigninActivity
+import org.wit.hillfort.views.settings.SettingsView
+import org.wit.hillfort.views.signin.SigninView
+import org.wit.hillfort.views.signup.SignupView
 import org.wit.hillfort.models.HillfortModel
 import org.wit.hillfort.views.hillfort.HillfortView
 
@@ -17,7 +18,7 @@ val IMAGE_REQUEST = 1
 val LOCATION_REQUEST = 2
 
 enum class VIEW {
-  LOCATION, HILLFORT, MAPS, LIST, SETTINGS, SIGNIN
+  LOCATION, HILLFORT, MAPS, LIST, SETTINGS, SIGNIN, SIGNUP
 }
 
 open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
@@ -32,8 +33,9 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
       VIEW.HILLFORT -> intent = Intent(this, HillfortView::class.java)
 //      VIEW.MAPS -> intent = Intent(this, HillfortMapView::class.java)
       VIEW.LIST -> intent = Intent(this, HillfortListView::class.java)
-      VIEW.SETTINGS -> intent = Intent(this, SettingsActivity::class.java)
-      VIEW.SIGNIN -> intent = Intent(this, SigninActivity::class.java)
+      VIEW.SETTINGS -> intent = Intent(this, SettingsView::class.java)
+      VIEW.SIGNIN -> intent = Intent(this, SigninView::class.java)
+      VIEW.SIGNUP -> intent = Intent(this, SignupView::class.java)
     }
     if (key != "") {
       intent.putExtra(key, value)
