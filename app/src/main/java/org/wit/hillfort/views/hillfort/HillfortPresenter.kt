@@ -25,12 +25,13 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
 
   }
 
-  fun doAddOrSave(title: String, description: String, notes: String, visited: Boolean, date: String) {
+  fun doAddOrSave(title: String, description: String, notes: String, visited: Boolean, date: String, rating: Float) {
     hillfort.title = title
     hillfort.description = description
     hillfort.notes = notes
     hillfort.visited = visited
     hillfort.date = date
+    hillfort.rating = rating
 
     if (edit) {
       app.users.updateHillfort(user, hillfort)

@@ -59,6 +59,7 @@ class UserMemStore : UserStore, AnkoLogger {
       foundHillfort.notes = hillfort.notes
       foundHillfort.date = hillfort.date
       foundHillfort.visited = hillfort.visited
+      foundHillfort.rating = hillfort.rating
       foundHillfort.images = hillfort.images;
       foundHillfort.lat = hillfort.lat;
       foundHillfort.lng = hillfort.lng;
