@@ -41,6 +41,11 @@ class UserMemStore : UserStore, AnkoLogger {
     return user.hillforts
   }
 
+  override fun findById(user: UserModel, id: Long) : HillfortModel? {
+    val foundHillfort: HillfortModel? = user.hillforts.find { it.id == id }
+    return foundHillfort
+  }
+
   override fun createHillfort(user: UserModel, hillfort: HillfortModel) {
     hillfort.id = generateRandomId()
     user.hillforts.add(hillfort)
