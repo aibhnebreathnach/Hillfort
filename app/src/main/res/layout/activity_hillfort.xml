@@ -124,6 +124,14 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
+                <ImageView
+                    android:id="@+id/hillfortImage"
+                    android:adjustViewBounds="true"
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
+                    android:layout_margin="2dp"
+                    android:layout_width="match_parent"/>
+
             </LinearLayout>
 
         </ScrollView>

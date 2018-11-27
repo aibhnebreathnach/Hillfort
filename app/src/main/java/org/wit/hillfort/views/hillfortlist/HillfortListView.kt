@@ -23,18 +23,13 @@ class HillfortListView : BaseView(), HillfortListener {
 
     presenter = initPresenter(HillfortListPresenter(this)) as HillfortListPresenter
 
-    if(intent.hasExtra("user_session")){
-      presenter.user = intent.extras.getParcelable<UserModel>("user_session")
-
-      // update user object on activity start
-      // So that the updated user object is passed, not the old one the activity is started with
-      for (saved_user in presenter.app.users.findAllUsers()) {
-        if (saved_user.id == presenter.user.id){
-          presenter.user = saved_user
-        }
-      }
-
-    }
+    // update user object on activity start
+    // So that the updated user object is passed, not the old one the activity is started with
+//    for (saved_user in presenter.app.users.findAllUsers()) {
+//      if (saved_user.id == presenter.user.id){
+//        presenter.user = saved_user
+//      }
+//    }
 
     val layoutManager = LinearLayoutManager(this)
     recyclerView.layoutManager = layoutManager
@@ -53,9 +48,7 @@ class HillfortListView : BaseView(), HillfortListener {
   }
 
   override fun onHillfortClick(hillfort: HillfortModel) {
-    startActivityForResult(intentFor<HillfortView>()
-        .putExtra("hillfort_edit", hillfort)
-        .putExtra("user_session", presenter.user), 0)
+    presenter.doEditHillfort(hillfort)
   }
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -9,14 +9,7 @@ import org.wit.hillfort.views.BaseView
 
 class SettingsPresenter(view: BaseView) : BasePresenter(view){
 
-  lateinit var user : UserModel
-
-  init
-  {
-    if (view.intent.hasExtra("user_session")) {
-      user = view.intent.extras.getParcelable<UserModel>("user_session")
-    }
-  }
+  var user = app.user
 
   fun doSaveSettings(settingsUsername : String, settingsPassword : String){
 

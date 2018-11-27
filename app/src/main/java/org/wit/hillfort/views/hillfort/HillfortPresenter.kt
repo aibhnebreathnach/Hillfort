@@ -11,7 +11,7 @@ import java.util.*
 class HillfortPresenter(view: BaseView) : BasePresenter(view) {
 
   var hillfort = HillfortModel()
-  lateinit var user : UserModel
+  var user = app.user
   var defaultLocation = Location(52.245696, -7.139102, 15f)
   var edit = false
 
@@ -23,23 +23,19 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
       view.showHillfort(hillfort)
     }
 
-    if (view.intent.hasExtra("user_session")) {
-      user = view.intent.extras.getParcelable<UserModel>("user_session")
-    }
   }
 
-  fun doAddOrSave(title: String, description: String, notes: String, visited: Boolean, date: String, images: ArrayList<String>) {
+  fun doAddOrSave(title: String, description: String, notes: String, visited: Boolean, date: String) {
     hillfort.title = title
     hillfort.description = description
     hillfort.notes = notes
     hillfort.visited = visited
     hillfort.date = date
-    hillfort.images = images
 
     if (edit) {
-      app.users.updateHillfort(user, hillfort.copy())
+      app.users.updateHillfort(user, hillfort)
     } else {
-      app.users.createHillfort(user, hillfort.copy())
+      app.users.createHillfort(user, hillfort)
     }
     view?.finish()
   }
@@ -76,7 +72,8 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
       hillfort.date = ""
     }
 
-    view?.showHillfort(hillfort) // overwrites unsaved changes! - shows empty hillfort object
+    // overwrites unsaved changes! - shows empty hillfort object
+    view?.showHillfort(hillfort)
   }
 
   override fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
@@ -87,7 +84,9 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
         if (data != null) {
           val image = data.data.toString()
           hillfort.images.add(image)
-          view?.showHillfort(hillfort) // overwrites unsaved changes! - shows empty hillfort object
+
+          // overwrites unsaved changes! - shows empty hillfort object
+          view?.showHillfort(hillfort)
         }
       }
 
@@ -99,6 +98,7 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
           hillfort.zoom = location.zoom
         }
       }
+
     }
 
   }

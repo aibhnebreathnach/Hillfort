@@ -8,18 +8,18 @@ import org.wit.hillfort.views.VIEW
 
 class HillfortListPresenter(view: BaseView) : BasePresenter(view) {
 
-  lateinit var user : UserModel
+  var user = app.user
 
   fun doAddHillfort(){
-    view?.navigateTo(VIEW.HILLFORT, 0, "user_session", user)
+    view?.navigateTo(VIEW.HILLFORT, 0)
   }
 
-  fun doEditHillfort(user : UserModel, hillfort : HillfortModel){
+  fun doEditHillfort(hillfort : HillfortModel){
     view?.navigateTo(VIEW.HILLFORT, 0, "hillfort_edit", hillfort)
   }
 
   fun doSettings(){
-    view?.navigateTo(VIEW.SETTINGS, 0, "user_session", user)
+    view?.navigateTo(VIEW.SETTINGS, 0)
   }
 
   fun doLogout() {

@@ -11,7 +11,6 @@ import org.wit.hillfort.views.BaseView
 
 class SettingsView : BaseView() {
 
-  lateinit var app: MainApp
   lateinit var presenter: SettingsPresenter
 
   override fun onCreate(savedInstanceState: Bundle?) {

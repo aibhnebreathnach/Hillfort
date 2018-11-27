@@ -16,7 +16,6 @@ import org.wit.hillfort.views.BaseView
 class HillfortView : BaseView(), AnkoLogger {
 
   lateinit var presenter : HillfortPresenter
-  var hillfort = HillfortModel()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -37,9 +36,13 @@ class HillfortView : BaseView(), AnkoLogger {
     hillfortVisited.setChecked(hillfort.visited)
     hillfortDate.setText(hillfort.date)
 
-    // Quick hack for multiple images
-    for (image in hillfort.images) {
-      addImageToView(image)
+    // Just last image in list
+    if (hillfort.images.size > 0){
+      Picasso.get().load(hillfort.images[0])
+          .placeholder(R.mipmap.ic_launcher)
+          .resize(1000, 1000)
+          .centerInside()
+          .into(hillfortImage)
     }
   }
 
@@ -52,16 +55,16 @@ class HillfortView : BaseView(), AnkoLogger {
     when (item?.itemId) {
 
       R.id.item_save -> {
-        hillfort.title = hillfortTitle.text.toString()
-        hillfort.description = hillfortDescription.text.toString()
-        hillfort.notes = hillfortNotes.text.toString()
-        hillfort.visited = hillfortVisited.isChecked
-        hillfort.date = hillfortDate.text.toString()
+        var title = hillfortTitle.text.toString()
+        var description = hillfortDescription.text.toString()
+        var notes = hillfortNotes.text.toString()
+        var visited = hillfortVisited.isChecked
+        var date = hillfortDate.text.toString()
 
-        if (hillfort.title.isEmpty()) {
+        if (title.isEmpty()) {
           toast(R.string.toast_enterTitle)
         } else {
-          presenter.doAddOrSave(hillfort.title, hillfort.description, hillfort.notes, hillfort.visited, hillfort.date, hillfort.images)
+          presenter.doAddOrSave(title, description, notes, visited, date)
         }
         setResult(AppCompatActivity.RESULT_OK)
         finish()

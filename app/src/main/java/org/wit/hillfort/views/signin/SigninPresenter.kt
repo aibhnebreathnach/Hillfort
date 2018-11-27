@@ -12,7 +12,8 @@ class SigninPresenter(view: BaseView) : BasePresenter(view) {
    var user = app.users.findAllUsers().find { it.username == username && it.password == password }
    if (user != null) {
      view?.toast("Sign In Successful!")
-     view?.navigateTo(VIEW.LIST, 0, "user_session", user)
+     app.user = user
+     view?.navigateTo(VIEW.LIST, 0)
      view?.finish()
    } else {
      view?.toast("Incorrect username or password!")
