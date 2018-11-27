@@ -50,7 +50,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".activities.MapsActivity"
+            android:name=".views.editlocation.EditLocationView"
             android:parentActivityName=".views.hillfort.HillfortView"
             android:label="@string/title_activity_maps"></activity>
 

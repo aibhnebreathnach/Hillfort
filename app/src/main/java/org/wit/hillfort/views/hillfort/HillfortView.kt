@@ -2,21 +2,23 @@ package org.wit.hillfort.views.hillfort
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ImageView
-import com.squareup.picasso.Picasso
+import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_hillfort.*
+import kotlinx.android.synthetic.main.activity_hillfort_list.*
+import kotlinx.android.synthetic.main.image_hillfort.*
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.sdk25.coroutines.onRatingBarChange
 import org.jetbrains.anko.toast
 import org.wit.hillfort.R
 import org.wit.hillfort.models.HillfortModel
 import org.wit.hillfort.views.BaseView
 
-class HillfortView : BaseView(), AnkoLogger {
+class HillfortView : BaseView(), AnkoLogger, HillfortImageListener {
 
   lateinit var presenter : HillfortPresenter
+  lateinit var map: GoogleMap
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -26,8 +28,17 @@ class HillfortView : BaseView(), AnkoLogger {
 
     presenter = initPresenter(HillfortPresenter(this)) as HillfortPresenter
     chooseImage.setOnClickListener { presenter.doSelectImage() }
-    hillfortLocation.setOnClickListener { presenter.doSetLocation() }
+    mapView.onCreate(savedInstanceState);
+    mapView.getMapAsync {
+      map = it
+      presenter.doConfigureMap(map)
+      it.setOnMapClickListener { presenter.doSetLocation() }
+    }
     hillfortVisited.setOnClickListener { presenter.doVisitedCheckbox(hillfortVisited.isChecked) }
+
+    val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+    hillfortImageRecycler.layoutManager = layoutManager
+    presenter.loadHillfortImages()
   }
 
   override fun showHillfort(hillfort: HillfortModel) {
@@ -37,15 +48,17 @@ class HillfortView : BaseView(), AnkoLogger {
     hillfortVisited.setChecked(hillfort.visited)
     hillfortDate.setText(hillfort.date)
     hillfortRating.setRating(hillfort.rating)
+    display_lat.setText("%.6f".format(hillfort.lat))
+    display_lng.setText("%.6f".format(hillfort.lng))
+  }
 
-    // Just last image in list
-    if (hillfort.images.size > 0){
-      Picasso.get().load(hillfort.images[0])
-          .placeholder(R.mipmap.ic_launcher)
-          .resize(1000, 1000)
-          .centerInside()
-          .into(hillfortImage)
-    }
+  override fun showHillfortImages (images: List<String>) {
+    hillfortImageRecycler.adapter = HillfortImageAdapter(images, this)
+    hillfortImageRecycler.adapter?.notifyDataSetChanged()
+  }
+
+  override fun onHillfortImageClick(image: String) {
+    toast("Image Clicked!")
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -78,18 +91,5 @@ class HillfortView : BaseView(), AnkoLogger {
 
     }
     return super.onOptionsItemSelected(item)
-  }
-
-  fun addImageToView(image: String) {
-    val image_view = ImageView(this)
-    image_view.setPadding(8, 10, 8, 10)
-
-    Picasso.get().load(image)
-        .placeholder(R.mipmap.ic_launcher)
-        .resize(1000, 1000)
-        .centerInside()
-        .into(image_view)
-
-    hillfort_layout.addView(image_view)
   }
 }

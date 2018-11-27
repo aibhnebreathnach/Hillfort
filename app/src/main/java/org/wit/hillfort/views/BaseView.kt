@@ -7,11 +7,11 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import org.jetbrains.anko.AnkoLogger
 import org.wit.hillfort.views.hillfortlist.HillfortListView
-import org.wit.hillfort.activities.MapsActivity
 import org.wit.hillfort.views.settings.SettingsView
 import org.wit.hillfort.views.signin.SigninView
 import org.wit.hillfort.views.signup.SignupView
 import org.wit.hillfort.models.HillfortModel
+import org.wit.hillfort.views.editlocation.EditLocationView
 import org.wit.hillfort.views.hillfort.HillfortView
 import org.wit.hillfort.views.map.HillfortMapView
 
@@ -30,7 +30,7 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
   fun navigateTo(view: VIEW, code: Int = 0, key: String = "", value: Parcelable? = null) {
     var intent = Intent(this, HillfortListView::class.java)
     when (view) {
-      VIEW.LOCATION -> intent = Intent(this, MapsActivity::class.java)
+      VIEW.LOCATION -> intent = Intent(this, EditLocationView::class.java)
       VIEW.HILLFORT -> intent = Intent(this, HillfortView::class.java)
       VIEW.MAPS -> intent = Intent(this, HillfortMapView::class.java)
       VIEW.LIST -> intent = Intent(this, HillfortListView::class.java)
@@ -72,6 +72,7 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
 
   open fun showHillfort(hillfort: HillfortModel) {}
   open fun showHillforts(hillforts: List<HillfortModel>) {}
+  open fun showHillfortImages(images: List<String>) {}
   open fun showProgress() {}
   open fun hideProgress() {}
 
