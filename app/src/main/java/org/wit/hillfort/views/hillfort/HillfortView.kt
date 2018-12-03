@@ -7,8 +7,6 @@ import android.view.Menu
 import android.view.MenuItem
 import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_hillfort.*
-import kotlinx.android.synthetic.main.activity_hillfort_list.*
-import kotlinx.android.synthetic.main.image_hillfort.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
 import org.wit.hillfort.R

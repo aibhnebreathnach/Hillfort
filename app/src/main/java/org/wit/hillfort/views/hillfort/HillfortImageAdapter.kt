@@ -31,8 +31,7 @@ class HillfortImageAdapter constructor(private var images: List<String>, private
 
       Picasso.get()
           .load(image)
-          .resize(1000, 1000)
-          .centerInside()
+          .fit()
           .into(itemView.hillfortImage)
 
       itemView.setOnClickListener { listener.onHillfortImageClick(image) }
