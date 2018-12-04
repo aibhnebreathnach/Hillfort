@@ -1,6 +1,7 @@
 package org.wit.hillfort.views.hillfortlist
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
@@ -23,15 +24,15 @@ class HillfortListView : BaseView(), HillfortListener {
 
     presenter = initPresenter(HillfortListPresenter(this)) as HillfortListPresenter
 
-    // update user object on activity start
-    // So that the updated user object is passed, not the old one the activity is started with
-//    for (saved_user in presenter.app.users.findAllUsers()) {
-//      if (saved_user.id == presenter.user.id){
-//        presenter.user = saved_user
-//      }
-//    }
 
-    val layoutManager = LinearLayoutManager(this)
+    var layoutManager = LinearLayoutManager(this)
+
+    // if orientation is landscape, make hillfort recycler view scroll horizontally
+    var orientation = getResources().getConfiguration().orientation
+    if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+      layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+    }
+
     recyclerView.layoutManager = layoutManager
     presenter.loadHilforts()
 
