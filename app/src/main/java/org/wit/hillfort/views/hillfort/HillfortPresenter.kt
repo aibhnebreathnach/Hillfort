@@ -46,6 +46,16 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
     view?.finish()
   }
 
+  // Temporarily save the field values to the Presenter Hillfort object
+  fun doTempSave(title: String, description: String, notes: String, visited: Boolean, date: String, rating: Float){
+    hillfort.title = title
+    hillfort.description = description
+    hillfort.notes = notes
+    hillfort.visited = visited
+    hillfort.date = date
+    hillfort.rating = rating
+  }
+
   fun doCancel() {
     view?.finish()
   }

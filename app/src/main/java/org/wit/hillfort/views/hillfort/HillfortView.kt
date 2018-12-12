@@ -25,14 +25,26 @@ class HillfortView : BaseView(), AnkoLogger, HillfortImageListener {
     init(toolbarHillfort)
 
     presenter = initPresenter(HillfortPresenter(this)) as HillfortPresenter
-    chooseImage.setOnClickListener { presenter.doSelectImage() }
-    mapView.onCreate(savedInstanceState);
+
+    chooseImage.setOnClickListener {
+      tempSave()
+      presenter.doSelectImage()
+    }
+
+    mapView.onCreate(savedInstanceState)
     mapView.getMapAsync {
       map = it
       presenter.doConfigureMap(map)
-      it.setOnMapClickListener { presenter.doSetLocation() }
+      it.setOnMapClickListener {
+        tempSave()
+        presenter.doSetLocation()
+      }
     }
-    hillfortVisited.setOnClickListener { presenter.doVisitedCheckbox(hillfortVisited.isChecked) }
+
+    hillfortVisited.setOnClickListener {
+      tempSave()
+      presenter.doVisitedCheckbox(hillfortVisited.isChecked)
+    }
 
     val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     hillfortImageRecycler.layoutManager = layoutManager
@@ -48,6 +60,7 @@ class HillfortView : BaseView(), AnkoLogger, HillfortImageListener {
     hillfortRating.setRating(hillfort.rating)
     display_lat.setText("%.6f".format(hillfort.lat))
     display_lng.setText("%.6f".format(hillfort.lng))
+    showHillfortImages(hillfort.images)
   }
 
   override fun showHillfortImages (images: List<String>) {
@@ -90,4 +103,16 @@ class HillfortView : BaseView(), AnkoLogger, HillfortImageListener {
     }
     return super.onOptionsItemSelected(item)
   }
+
+  // Temporarily save hillfort fields in presenter hillfort object
+  fun tempSave(){
+    var title = hillfortTitle.text.toString()
+    var description = hillfortDescription.text.toString()
+    var notes = hillfortNotes.text.toString()
+    var visited = hillfortVisited.isChecked
+    var date = hillfortDate.text.toString()
+    var rating = hillfortRating.rating
+    presenter.doTempSave(title, description, notes, visited, date, rating)
+  }
+
 }
