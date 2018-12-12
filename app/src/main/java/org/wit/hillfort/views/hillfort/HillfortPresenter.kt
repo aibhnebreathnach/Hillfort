@@ -30,11 +30,12 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
 
   }
 
-  fun doAddOrSave(title: String, description: String, notes: String, visited: Boolean, date: String, rating: Float) {
+  fun doAddOrSave(title: String, description: String, notes: String, visited: Boolean, favorite: Boolean, date: String, rating: Float) {
     hillfort.title = title
     hillfort.description = description
     hillfort.notes = notes
     hillfort.visited = visited
+    hillfort.favorite = favorite
     hillfort.date = date
     hillfort.rating = rating
 
@@ -47,11 +48,12 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
   }
 
   // Temporarily save the field values to the Presenter Hillfort object
-  fun doTempSave(title: String, description: String, notes: String, visited: Boolean, date: String, rating: Float){
+  fun doTempSave(title: String, description: String, notes: String, visited: Boolean, favorite: Boolean, date: String, rating: Float){
     hillfort.title = title
     hillfort.description = description
     hillfort.notes = notes
     hillfort.visited = visited
+    hillfort.favorite = favorite
     hillfort.date = date
     hillfort.rating = rating
   }
@@ -79,7 +81,7 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
     if (edit == false) {
       view?.navigateTo(VIEW.LOCATION, LOCATION_REQUEST, "location", defaultLocation)
     } else {
-      view?.navigateTo(VIEW.LOCATION, LOCATION_REQUEST, "location", Location(hillfort.lat, hillfort.lng, hillfort.zoom))
+      view?.navigateTo(VIEW.LOCATION, LOCATION_REQUEST, "location", Location(hillfort.location.lat, hillfort.location.lng, hillfort.location.zoom))
     }
   }
 
@@ -92,24 +94,28 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
       hillfort.date = ""
     }
 
-    // overwrites unsaved changes! - shows empty hillfort object
+    view?.showHillfort(hillfort)
+  }
+
+  fun doFavoriteCheckbox(favorite: Boolean) {
+    hillfort.favorite = favorite
     view?.showHillfort(hillfort)
   }
 
   fun doConfigureMap(m: GoogleMap) {
     map = m
-    locationUpdate(hillfort.lat, hillfort.lng)
+    locationUpdate(hillfort.location.lat, hillfort.location.lng)
   }
 
   fun locationUpdate(lat: Double, lng: Double) {
-    hillfort.lat = lat
-    hillfort.lng = lng
-    hillfort.zoom = 15f
+    hillfort.location.lat = lat
+    hillfort.location.lng = lng
+    hillfort.location.zoom = 15f
     map?.clear()
     map?.uiSettings?.setZoomControlsEnabled(true)
-    val options = MarkerOptions().title(hillfort.title).position(LatLng(hillfort.lat, hillfort.lng))
+    val options = MarkerOptions().title(hillfort.title).position(LatLng(hillfort.location.lat, hillfort.location.lng))
     map?.addMarker(options)
-    map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(hillfort.lat, hillfort.lng), hillfort.zoom))
+    map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(hillfort.location.lat, hillfort.location.lng), hillfort.location.zoom))
     view?.showHillfort(hillfort)
   }
 
@@ -121,8 +127,6 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
         if (data != null) {
           val image = data.data.toString()
           hillfort.images.add(image)
-
-          // overwrites unsaved changes! - shows empty hillfort object
           view?.showHillfort(hillfort)
         }
       }
@@ -130,10 +134,10 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
       LOCATION_REQUEST -> {
         if (data != null) {
           val location = data.extras.getParcelable<Location>("location")
-          hillfort.lat = location.lat
-          hillfort.lng = location.lng
-          hillfort.zoom = location.zoom
-          locationUpdate(hillfort.lat, hillfort.lng)
+          hillfort.location.lat = location.lat
+          hillfort.location.lng = location.lng
+          hillfort.location.zoom = location.zoom
+          locationUpdate(hillfort.location.lat, hillfort.location.lng)
         }
       }
 

@@ -96,12 +96,10 @@
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/hillfortDate"
-                android:layout_width="0dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="none"
-                app:layout_constraintEnd_toStartOf="@+id/hillfortVisited"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/hillfortNotes" />
 
@@ -117,10 +115,23 @@
 
             <CheckBox
                 android:id="@+id/hillfortVisited"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="96dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:padding="10dp"
                 android:text="@string/checkbox_visited"
+                app:layout_constraintEnd_toStartOf="@+id/hillfortFavorite"
+                app:layout_constraintStart_toEndOf="@+id/hillfortDate"
+                app:layout_constraintTop_toBottomOf="@+id/hillfortNotes" />
+
+            <CheckBox
+                android:id="@+id/hillfortFavorite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:padding="10dp"
+                android:text="@string/checkbox_favorite"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/hillfortNotes" />
 

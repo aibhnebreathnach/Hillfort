@@ -33,6 +33,7 @@ class HillfortAdapter constructor(private var hillforts: List<HillfortModel>,
       itemView.hillfortCardTitle.text = hillfort.title
       itemView.description.text = hillfort.description
       itemView.hillfort_visited.setChecked(hillfort.visited)
+      itemView.hillfort_favorited.setChecked(hillfort.favorite)
 
       if (hillfort.images.isEmpty()) {
         Picasso.get()

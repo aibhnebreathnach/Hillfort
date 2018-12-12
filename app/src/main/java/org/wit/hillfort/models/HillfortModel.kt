@@ -10,11 +10,10 @@ data class HillfortModel(var id: Long = 0,
                          var notes: String = "",
                          var images: ArrayList<String> = ArrayList(),
                          var visited: Boolean = false,
+                         var favorite: Boolean = false,
                          var rating: Float = 0.0f,
                          var date: String = "",
-                         var lat: Double = 0.0,
-                         var lng: Double = 0.0,
-                         var zoom: Float = 0f) : Parcelable
+                         var location: Location = Location(0.0, 0.0, 0f)) : Parcelable
 
 @Parcelize
 data class Location(var lat: Double = 0.0,

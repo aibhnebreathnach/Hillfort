@@ -86,11 +86,12 @@ class UserJSONStore : UserStore, AnkoLogger {
         foundHillfort.notes = hillfort.notes
         foundHillfort.date = hillfort.date
         foundHillfort.visited = hillfort.visited
+        foundHillfort.favorite = hillfort.favorite
         foundHillfort.rating = hillfort.rating
         foundHillfort.images = hillfort.images
-        foundHillfort.lat = hillfort.lat;
-        foundHillfort.lng = hillfort.lng;
-        foundHillfort.zoom = hillfort.zoom;
+        foundHillfort.location.lat = hillfort.location.lat
+        foundHillfort.location.lng = hillfort.location.lng
+        foundHillfort.location.zoom = hillfort.location.zoom
         serialize()
       }
     }

@@ -46,6 +46,11 @@ class HillfortView : BaseView(), AnkoLogger, HillfortImageListener {
       presenter.doVisitedCheckbox(hillfortVisited.isChecked)
     }
 
+    hillfortFavorite.setOnClickListener {
+      tempSave()
+      presenter.doFavoriteCheckbox(hillfortFavorite.isChecked)
+    }
+
     val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     hillfortImageRecycler.layoutManager = layoutManager
     presenter.loadHillfortImages()
@@ -56,10 +61,11 @@ class HillfortView : BaseView(), AnkoLogger, HillfortImageListener {
     hillfortDescription.setText(hillfort.description)
     hillfortNotes.setText(hillfort.notes)
     hillfortVisited.setChecked(hillfort.visited)
+    hillfortFavorite.setChecked(hillfort.favorite)
     hillfortDate.setText(hillfort.date)
     hillfortRating.setRating(hillfort.rating)
-    display_lat.setText("%.6f".format(hillfort.lat))
-    display_lng.setText("%.6f".format(hillfort.lng))
+    display_lat.setText("%.6f".format(hillfort.location.lat))
+    display_lng.setText("%.6f".format(hillfort.location.lng))
     showHillfortImages(hillfort.images)
   }
 
@@ -85,13 +91,14 @@ class HillfortView : BaseView(), AnkoLogger, HillfortImageListener {
         var description = hillfortDescription.text.toString()
         var notes = hillfortNotes.text.toString()
         var visited = hillfortVisited.isChecked
+        var favorite = hillfortFavorite.isChecked
         var date = hillfortDate.text.toString()
         var rating = hillfortRating.rating
 
         if (title.isEmpty()) {
           toast(R.string.toast_enterTitle)
         } else {
-          presenter.doAddOrSave(title, description, notes, visited, date, rating)
+          presenter.doAddOrSave(title, description, notes, visited,favorite, date, rating)
         }
         setResult(AppCompatActivity.RESULT_OK)
         finish()
@@ -110,9 +117,10 @@ class HillfortView : BaseView(), AnkoLogger, HillfortImageListener {
     var description = hillfortDescription.text.toString()
     var notes = hillfortNotes.text.toString()
     var visited = hillfortVisited.isChecked
+    var favorite = hillfortFavorite.isChecked()
     var date = hillfortDate.text.toString()
     var rating = hillfortRating.rating
-    presenter.doTempSave(title, description, notes, visited, date, rating)
+    presenter.doTempSave(title, description, notes, visited, favorite, date, rating)
   }
 
 }
