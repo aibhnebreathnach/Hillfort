@@ -3,7 +3,7 @@ package org.wit.hillfort.views.hillfortlist
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.*
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.intentFor
@@ -25,12 +25,12 @@ class HillfortListView : BaseView(), HillfortListener {
     presenter = initPresenter(HillfortListPresenter(this)) as HillfortListPresenter
 
 
-    var layoutManager = LinearLayoutManager(this)
+    var layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
 
     // if orientation is landscape, make hillfort recycler view scroll horizontally
     var orientation = getResources().getConfiguration().orientation
     if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-      layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+      layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this, androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL, false)
     }
 
     recyclerView.layoutManager = layoutManager

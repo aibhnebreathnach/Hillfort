@@ -1,8 +1,8 @@
 package org.wit.hillfort.views.hillfort
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import com.google.android.gms.maps.GoogleMap
@@ -51,7 +51,7 @@ class HillfortView : BaseView(), AnkoLogger, HillfortImageListener {
       presenter.doFavoriteCheckbox(hillfortFavorite.isChecked)
     }
 
-    val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+    val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this, androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL, false)
     hillfortImageRecycler.layoutManager = layoutManager
     presenter.loadHillfortImages()
   }
