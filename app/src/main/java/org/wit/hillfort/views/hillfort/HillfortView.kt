@@ -2,7 +2,6 @@ package org.wit.hillfort.views.hillfort
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import com.google.android.gms.maps.GoogleMap
