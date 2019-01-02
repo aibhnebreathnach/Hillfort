@@ -38,14 +38,10 @@ class HillfortAdapter constructor(private var hillforts: List<HillfortModel>,
       if (hillfort.images.isEmpty()) {
         Picasso.get()
             .load(R.mipmap.ic_launcher_round)
-            .resize(1000, 1000)
-            .centerInside()
             .into(itemView.hillfortCardImage)
       } else {
         Picasso.get()
             .load(hillfort.images[0]) // only load first image of list
-            .resize(750, 750)
-            .centerInside()
             .into(itemView.hillfortCardImage)
       }
 
