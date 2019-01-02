@@ -29,7 +29,7 @@
     <string name="button_location">Set Location</string>
     <string name="title_activity_maps">Map</string>
 
-    <string name="hint_signin_username">username</string>
+    <string name="hint_signin_username">email</string>
     <string name="hint_signin_password">password</string>
     <string name="button_signin">Sign In</string>
     <string name="signin_title">Sign In</string>

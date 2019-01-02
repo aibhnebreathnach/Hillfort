@@ -3,6 +3,7 @@ package org.wit.hillfort.views.signin
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import kotlinx.android.synthetic.main.activity_signin.*
 import org.jetbrains.anko.*
 import org.wit.hillfort.R
@@ -22,11 +23,13 @@ class SigninView : BaseView(), AnkoLogger {
     toolbarSignin.title = getString(R.string.signin_title)
     setSupportActionBar(toolbarSignin)
 
+    progressBar.visibility = View.GONE
+
     signin_button.setOnClickListener() {
 
-      val username = signin_username.text.toString()
+      val email = signin_username.text.toString()
       val password = signin_password.text.toString()
-      presenter.doSignin(username, password)
+      presenter.doSignIn(email, password)
     }
 
   }
@@ -45,5 +48,13 @@ class SigninView : BaseView(), AnkoLogger {
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
     menuInflater.inflate(R.menu.menu_signin, menu)
     return super.onCreateOptionsMenu(menu)
+  }
+
+  override fun showProgress() {
+    progressBar.visibility = View.VISIBLE
+  }
+
+  override fun hideProgress() {
+    progressBar.visibility = View.GONE
   }
 }

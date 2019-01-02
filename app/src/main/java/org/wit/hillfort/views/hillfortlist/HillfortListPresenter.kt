@@ -8,7 +8,6 @@ import org.wit.hillfort.views.VIEW
 
 class HillfortListPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
 
-  var user = app.user
   var favorite = false
 
   fun doAddHillfort(){
@@ -33,15 +32,14 @@ class HillfortListPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
 
   fun loadHilforts() {
     if (favorite){
-      view?.showHillforts(user.hillforts.filter { hf -> hf.favorite })
+      view?.showHillforts(app.hillforts.filter { hf -> hf.favorite })
     } else {
-      view?.showHillforts(user.hillforts)
+      view?.showHillforts(app.hillforts)
     }
   }
 
   fun filterHillforts(search: String){
-    // filter on title
-    var filteredHillforts = user.hillforts.filter { hf -> hf.title.contains(search, ignoreCase = true)}
+    var filteredHillforts = app.hillforts.filter { hf -> hf.title.contains(search, ignoreCase = true)}
     view?.showHillforts(filteredHillforts)
   }
 

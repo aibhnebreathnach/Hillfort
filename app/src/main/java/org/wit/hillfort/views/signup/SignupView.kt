@@ -27,7 +27,7 @@ class SignupView : BaseView(), AnkoLogger {
 
       val username = signup_username.text.toString()
       val password = signup_password.text.toString()
-      presenter.doSignup(username, password)
+      presenter.doSignUp(username, password)
     }
 
   }

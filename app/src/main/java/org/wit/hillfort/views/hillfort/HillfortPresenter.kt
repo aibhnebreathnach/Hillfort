@@ -16,7 +16,6 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
 
   var map: GoogleMap? = null
   var hillfort = HillfortModel()
-  var user = app.user
   var defaultLocation = Location(52.245696, -7.139102, 15f)
   var edit = false
 
@@ -40,9 +39,9 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
     hillfort.rating = rating
 
     if (edit) {
-      app.users.updateHillfort(user, hillfort)
+      app.firestore.update(hillfort)
     } else {
-      app.users.createHillfort(user, hillfort)
+      app.firestore.create(hillfort)
     }
     view?.finish()
   }
@@ -63,7 +62,7 @@ class HillfortPresenter(view: BaseView) : BasePresenter(view) {
   }
 
   fun doDelete() {
-    app.users.deleteHillfort(user, hillfort)
+    app.firestore.delete(hillfort)
     view?.finish()
   }
 

@@ -3,6 +3,7 @@ package org.wit.hillfort.views.settings
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_settings.*
 import org.wit.hillfort.R
 import org.wit.hillfort.main.MainApp
@@ -21,12 +22,12 @@ class SettingsView : BaseView() {
 
     presenter = initPresenter (SettingsPresenter(this)) as SettingsPresenter
 
-    settings_username.setText(presenter.user.username)
-    settings_password.setText(presenter.user.password)
+    settings_username.setText(presenter.auth.currentUser?.email)
+    settings_password.setText("secret")
 
-    var hillfortCountTotal = presenter.user.hillforts.size
-    var hillfortCountVisited = presenter.user.hillforts.count { hf -> hf.visited }
-    var hillfortCountFavorites = presenter.user.hillforts.count {hf -> hf.favorite }
+    var hillfortCountTotal = presenter.app.hillforts.size
+    var hillfortCountVisited = presenter.app.hillforts.count { hf -> hf.visited }
+    var hillfortCountFavorites = presenter.app.hillforts.count {hf -> hf.favorite }
 
     settings_hillfort_count_total.setBackground(null)
     settings_hillfort_count_total.setKeyListener(null)

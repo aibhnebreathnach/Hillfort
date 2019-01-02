@@ -23,12 +23,12 @@ class HillfortMapPresenter(view: BaseView) : BasePresenter(view) {
 
   fun doMarkerSelected(marker: Marker) {
     val tag = marker.tag as Long
-    val hillfort = app.users.findById(app.user, tag)
+    val hillfort = app.firestore.findById(tag)
     if (hillfort != null) view?.showHillfort(hillfort)
   }
 
   fun doLoadHillforts() {
-    view?.showHillforts(app.users.findAllHillforts(app.user))
+    view?.showHillforts(app.firestore.findAll())
   }
 
 }
