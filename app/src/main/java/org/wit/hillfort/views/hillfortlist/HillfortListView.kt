@@ -3,10 +3,13 @@ package org.wit.hillfort.views.hillfortlist
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.*
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.toast
 import org.wit.hillfort.R
 import org.wit.hillfort.models.HillfortModel
 import org.wit.hillfort.models.UserModel
@@ -24,6 +27,19 @@ class HillfortListView : BaseView(), HillfortListener {
 
     presenter = initPresenter(HillfortListPresenter(this)) as HillfortListPresenter
 
+    hillfortSearch.addTextChangedListener(object: TextWatcher{
+
+      override fun afterTextChanged(s: Editable?) {
+      }
+
+      override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+      }
+
+      override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        presenter.filterHillforts(s.toString())
+      }
+
+    })
 
     var layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
 
@@ -61,7 +77,6 @@ class HillfortListView : BaseView(), HillfortListener {
     when (item?.itemId) {
       R.id.item_add -> { presenter.doAddHillfort() }
       R.id.item_filter_favorite -> {
-
         if (!presenter.favorite) {
           presenter.favorite = true
         } else {

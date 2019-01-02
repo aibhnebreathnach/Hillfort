@@ -2,11 +2,9 @@ package org.wit.hillfort.views.hillfortlist
 
 import org.jetbrains.anko.AnkoLogger
 import org.wit.hillfort.models.HillfortModel
-import org.wit.hillfort.models.UserModel
 import org.wit.hillfort.views.BasePresenter
 import org.wit.hillfort.views.BaseView
 import org.wit.hillfort.views.VIEW
-import org.jetbrains.anko.info
 
 class HillfortListPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
 
@@ -41,7 +39,10 @@ class HillfortListPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
     }
   }
 
-  fun loadFavoriteHillforts() {
-    view?.showHillforts(user.hillforts.filter { hf -> hf.favorite })
+  fun filterHillforts(search: String){
+    // filter on title
+    var filteredHillforts = user.hillforts.filter { hf -> hf.title.contains(search, ignoreCase = true)}
+    view?.showHillforts(filteredHillforts)
   }
+
 }

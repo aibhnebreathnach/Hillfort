@@ -41,6 +41,8 @@
     <string name="checkbox_visited">Visited</string>
     <string name="checkbox_favorite">Favorite</string>
 
+    <string name="hillfort_search">Search Hillforts ...</string>
+
     <string name="hint_settings_username">username</string>
     <string name="hint_settings_password">password</string>
     <string name="settings_hillfort_count_total">Total Hillforts</string>
